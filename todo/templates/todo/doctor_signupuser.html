@@ -1,0 +1,80 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5">
+            <h2>Registration form for Doctor</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <input type="text" name="adhar_num" class="form-control" id="adhar_num" placeholder="Adhar card Number" required >
+                    <!-- <input type="text" name="adhar_num" class="form-control" id="adhar_num" placeholder="Adhar card Number" required  pattern="(?=.*\d).{12,}" title="Please enter valid 12 digit Adhar Card Number"> -->
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="first_name" class="form-control" id="first_name"  placeholder="First Name" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="last_name" class="form-control" id="last_name"  placeholder="Last Name" required>
+                </div>
+
+                <label for="dob"><b> Date of Birth </b> &nbsp &nbsp</label>
+                <input type="date" id="dob" name="dob">
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                
+                <label for="gender"> <b>Gender:</b> &nbsp &nbsp</label>
+                <select id="gender" name="gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                <br>
+
+
+                <div class="form-group">
+                    <input type="text" name="Mobile_Number" class="form-control" id="Mobile_Number"  placeholder="Mobile Number" required  pattern="(?=.*\d).{10,}" title="Please enter valid 10 digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="Email_ID" class="form-control" id="Email_ID"  placeholder="Email ID" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="Address" class="form-control" id="Address"  placeholder="Addresss" required >
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="hin" class="form-control" id="hin"  placeholder="License ID" required >
+                </div>
+                
+
+                <div class="form-group">
+                    <input type="password" name="password1" class="form-control" id="password1" placeholder="Password" required >
+                    <!-- <input type="password" name="password1" class="form-control" id="password1" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"> -->
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm Password" required >
+                    <!-- <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"> -->
+                </div>
+                <button type="submit" class="btn btn-dark">Sign Up</button>
+
+            </form>
+            <hr>
+            <div class="text-center">
+                Do you already have an account? <a href="{% url 'loginuser' %}">Login here</a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

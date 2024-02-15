@@ -1,0 +1,66 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <h2>Predict Health issue from Symptoms</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+                 <form action ="predicted_result">
+
+                  <label for="sys1">Symptom 1 :</label>  
+                  <select name="sys1" id="sys1">
+                    {% for symptom in symptoms %}
+                    <option value={{symptom}}>{{symptom}}</option>                    
+                    {% endfor %}
+                  </select>
+                  <br>
+
+                  <label for="sys2">Symptom 2 :</label>  
+                  <select name="sys2" id="sys2">
+                    {% for symptom in symptoms %}
+                    <option value={{symptom}}>{{symptom}}</option>                    
+                    {% endfor %}
+                  </select>
+                  <br>
+
+
+                  <label for="sys3">Symptom 3 :</label>  
+                  <select name="sys3" id="sys3">
+                    {% for symptom in symptoms %}
+                    <option value={{symptom}}>{{symptom}}</option>                    
+                    {% endfor %}
+                  </select>
+                  <br>
+
+
+                  <label for="sys4">Symptom 4 :</label>  
+                  <select name="sys4" id="sys4">
+                    {% for symptom in symptoms %}
+                    <option value={{symptom}}>{{symptom}}</option>                    
+                    {% endfor %}
+                  </select>
+                  <br>
+
+                  <label for="sys5">Symptom 5 :</label>  
+                  <select name="sys5" id="sys5">
+                    {% for symptom in symptoms %}
+                    <option value={{symptom}}>{{symptom}}</option>                    
+                    {% endfor %}
+                  </select>
+                  <br>
+                  <br>
+
+                <button type="submit" class="btn btn-primary">Predict Disease</button>
+                </form>
+        </div>
+    </div>
+{% endblock %}

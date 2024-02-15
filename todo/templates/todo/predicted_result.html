@@ -1,0 +1,41 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-9">
+            <h2>Predicted Disease from Symptoms</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-9">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="memo"><b>Symptoms</b></label>
+                    <textarea name="memo" class="form-control" id="memo" > {{ symptoms }} </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="title"><b>Predicted Disease <i>(Percentage of having this disease :  {{ accuracy }} %) </i></b></label>
+                    <textarea name="title" class="form-control" id="title" > {{ disease }} </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="medicine"><b>Medicine</b></label>
+                    <textarea name="medicine" class="form-control" id="title" > {{ medicine }} </textarea>
+                </div>
+
+                <h6> Suggested doctor for predicted disease :<b><i> {{ doctor }}</b> </i></h6>
+                <h6> Suggested Excersize for predicted disease :<b> <i> {{ excersize }} </b></i></h6>
+                <h6> Suggested Diet for predicted disease : <i><b>{{ diet }}</b> </i></h6>
+                <br>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,292 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+
+<head>
+
+    <style>
+        #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+        
+        #customers td, #customers th {
+        border: 3px solid #16041f;
+        padding: 8px;
+        text-align: center;
+        }
+        
+        #customers tr:nth-child(even){background-color: #deca91;text-align: center}
+        #customers tr:nth-child(odd){background-color: #ddc366;text-align: center}
+        #customers tr:hover {background-color: #f1f1f1;text-align: center;text;color: rgba(0, 0, 170, 0.858)}
+        
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #bb8f16;
+        color: rgba(250, 250, 250, 0.858);
+        }
+
+
+        #customers2 {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+        
+        #customers2 td, #customers2 th {
+        border: 3px solid #16041f;
+        padding: 8px;
+        text-align: center;
+        }
+        
+        #customers2 tr:nth-child(even){background-color: #5aa85a;text-align: center}
+        #customers2 tr:nth-child(odd){background-color: #a9daac;text-align: center}
+        #customers2 tr:hover {background-color: #f1f1f1;text-align: center;text;color: rgba(0, 0, 170, 0.858)}
+        
+        #customers2 th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #73b452;
+        color: rgba(250, 250, 250, 0.858);
+        }
+
+/*  */
+
+        #customers3 {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+        
+        #customers3 td, #customers3 th {
+        border: 3px solid #16041f;
+        padding: 8px;
+        text-align: center;
+        }
+        
+        #customers3 tr:nth-child(even){background-color: #5a67a8;text-align: center}
+        #customers3 tr:nth-child(odd){background-color: #7883a1;text-align: center}
+        #customers3 tr:hover {background-color: #f1f1f1;text-align: center;text;color: rgba(0, 0, 170, 0.858)}
+        
+        #customers3 th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #6b95c5;
+        color: rgba(250, 250, 250, 0.858);
+        }
+
+
+
+
+        .blink-bg{
+            color: #fff;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 5px;
+            animation: blinkingBackground 4s infinite;
+                }
+        @keyframes blinkingBackground{
+            0%		{ background-color: #10c018;}
+            25%		{ background-color: #1056c0;}
+            50%		{ background-color: #ef0a1a;}
+            75%		{ background-color: #254878;}
+            100%	{ background-color: #04a1d5;}
+            }        
+
+        .blink-bg2{
+            color: #fff;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 5px;
+            animation: blinkingBackground2 2s infinite;
+                }
+        @keyframes blinkingBackground2{
+            0%		{ background-color: #254878;}
+            25%	    { background-color: #04a1d5;}
+            50%		{ background-color: #10c018;}
+            75%		{ background-color: #1056c0;}
+            100%	{ background-color: #ef0a1a;}
+            }        
+
+
+
+
+        </style>
+</head>
+
+
+
+{% if data_information %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <h2>Search for Patient</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-3">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                <label for="patient">Patient name {adhar card number} :</label>  
+                <select name="patient" id="patient">
+                    {% for ui in data_information %}
+                        <option value={{ui.user_id_to_search}}>{{ui.user_identity}}</option>                    
+                    {% endfor %}
+                </select>
+                <br>
+                <br>
+                <br>
+
+                <button type="submit" class="btn btn-success">Check Patient Data</button>
+                </form>
+        </div>
+    </div>
+
+
+{% else %}
+
+        <br><br><br>
+
+        <div class="row justify-content-center mt-7">
+            <div class="col-md-7">
+            <table id="customers">                
+                {% for ui in user_info %}                
+                            <tr>
+                            {% if ui.role == "Doctor" %}
+                                <th colspan="2" style="color: rgba(125, 7, 11, 0.858);"> <h3> Doctor </h3></th>
+                            {% endif %}     
+                            </tr>
+                        <tr>                    
+                            <th>Name</th>
+                            <th>                        
+                                {% if ui.role == "Doctor" %}
+                                Dr.
+                                {% endif %}     
+                                {{ui.first_name}} {{ui.last_name}} </th>
+                        </tr>
+                        <tr>
+                            <td>Adhar Card Number</td>
+                            <td>{{user.username}} </td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>{{ui.gender}}  </td>
+                        </tr>                    
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td>{{ui.dob}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{ui.Address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Number</td>
+                            <td>+91 {{ui.mobile}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email ID</td>
+                            <td>{{ui.Email_ID}}</td>
+                        </tr>
+                        <tr>                                
+                            {% if ui.role == "Doctor" %}
+                                <td>License ID</td>
+                            {% else %}
+                                <td>Health Insurance Number</td>
+                            {% endif %}     
+                            <td>{{ui.hin}}</td>
+                        </tr>                
+                {% endfor %}                
+            </table>
+            <br>
+            </div>
+        </div>
+<!--  -->
+<!--  -->
+
+
+<div class="row justify-content-center mt-7">
+    <div class="col-md-7">
+        {% for ui in disease_info %}                
+            {% if not ui.datecompleted %}
+                <table id="customers2">  
+                       
+                        <tr>                    
+                            <th>Current Disease name</th>
+                            <th>{{ui.title}} </th>
+                        </tr>
+                        <tr>
+                            <td>Disease Symptoms </td>
+                            <td>{{ui.memo}} </td>
+                        </tr>
+                        <tr>
+                            <td>Medicine taken </td>
+                            <td>{{ui.medicine}} </td>
+                        </tr>
+                        <tr>
+                            <td>Disease detected on </td>
+                            <td>{{ui.created}} </td>
+                        </tr>
+                </table>
+            {% endif %}    
+
+            <br><br>
+        {% endfor %}                
+    <br>
+    </div>
+</div>
+
+<!--  -->
+
+<hr>
+
+<div class="row justify-content-center mt-7">
+    <div class="col-md-7">
+        {% for ui in disease_info %}                
+            {% if ui.datecompleted %}
+                <table id="customers3">  
+                       
+                        <tr>                    
+                            <th>Recovered Disease name</th>
+                            <th>{{ui.title}} </th>
+                        </tr>
+                        <tr>
+                            <td>Disease Symptoms </td>
+                            <td>{{ui.memo}} </td>
+                        </tr>
+                        <tr>
+                            <td>Medicine taken </td>
+                            <td>{{ui.medicine}} </td>
+                        </tr>
+                        <tr>
+                            <td>Disease detected on </td>
+                            <td>{{ui.created}} </td>
+                        </tr>
+                        <tr>
+                            <td>Recovered on</td>
+                            <td>{{ui.datecompleted}}  </td>
+                        </tr>   
+                </table>
+            {% endif %}    
+
+            <br><br>
+        {% endfor %}                
+    <br>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
